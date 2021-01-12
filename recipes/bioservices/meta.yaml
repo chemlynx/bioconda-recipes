@@ -1,71 +1,44 @@
+{% set name = "bioservices" %}
+{% set version = "1.7.11" %}
+{% set sha256 = "ad169fb2a1971daddd67507b81b07cb9654dfea7b76a5926d0913229f1e9d0fe" %}
+
 package:
-  name: bioservices
-  version: "1.4.16"
+  name: {{ name }}
+  version: {{ version }}
 
 source:
-  fn: bioservices.1.4.16.tar.gz
-  url: https://pypi.python.org/packages/40/b0/a105fb56c0210693352dc7136bf3f34ef622768d4c51f796d89bee87f559/bioservices-1.4.16.tar.gz
-  md5: 1a5509f892ac47db176b183a106a623a
-
-#  patches:
-   # List any patch files here
-   # - fix.patch
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 build:
-  skip: False
-  number: 1
+  noarch: python
+  number: 0
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
-    - grequests
-    - requests
-    - requests-cache
-    - easydev
-    - beautifulsoup4
-    - suds-jurko
-    - appdirs
-    - wrapt
-    - numpydoc
-    - xmltodict
 
   run:
     - python
     - grequests
     - requests
     - requests-cache
-    - easydev
+    - easydev >=0.9.36
     - beautifulsoup4
     - suds-jurko
     - appdirs
     - wrapt
     - numpydoc
+    - pandas
 
 test:
-  # Python imports
   imports:
     - bioservices
     - bioservices.apps
     - bioservices.mapping
 
-  # commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
-
 about:
-  home: ['http://pypi.python.org/pypi/bioservices']
-  license: GNU Library or Lesser General Public License (LGPL)
+  home: http://pypi.python.org/pypi/bioservices
+  license: GPLv3
   summary: 'Access to Biological Web Services from Python'
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
